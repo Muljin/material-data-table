@@ -1,3 +1,4 @@
+import { TooltipPosition } from '@angular/material/tooltip';
 import { TableImage } from './table-image';
 
 export type TableColumn = {
@@ -45,6 +46,7 @@ export type TableColumn = {
   menu?: {
     // the key used to select items from the data objects inside the menu array
     dataKey: string;
+    label?: string;
   };
 
   /*
@@ -57,6 +59,7 @@ export type TableColumn = {
   icon?: {
     src: ((row: any) => string) | string;
     tooltip?: ((row: any) => string) | string;
+    tooltipPosition?: TooltipPosition;
     color?: (row: any) => string;
     onClick?: (row: any) => void;
     isDisabled?: (row: any) => boolean;
