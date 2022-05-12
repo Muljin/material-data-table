@@ -1,16 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-table-filter',
+  selector: 'table-filter',
   templateUrl: './table-filter.component.html',
-  styleUrls: ['./table-filter.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./table-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableFilterComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

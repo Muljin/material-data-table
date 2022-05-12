@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-table-cell',
+  selector: 'table-cell',
   templateUrl: './table-cell.component.html',
   styleUrls: ['./table-cell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

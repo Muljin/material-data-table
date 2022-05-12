@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-table-action',
+  selector: 'table-action',
   templateUrl: './table-action.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
