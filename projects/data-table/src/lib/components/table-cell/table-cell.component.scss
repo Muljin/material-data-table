@@ -1,0 +1,12 @@
+.cell-icon {
+  vertical-align: middle;
+  margin-left: 5px;
+  transform: scale(0.8);
+}
+
+.link {
+  text-decoration: underline;
+  &:hover {
+    cursor: pointer;
+  }
+}
