@@ -1,0 +1,83 @@
+<!-- Displaying regular text -->
+<ng-container *ngIf="!column.menu && !column.chip && !column.image">
+  <span
+    [ngClass]="{ link: column.link }"
+    (click)="column.link && column.link.onClick(row)"
+  >
+    {{ cellValue }}
+  </span>
+</ng-container>
+
+<!-- Displaying a chip -->
+<span
+  *ngIf="column.chip"
+  class="chip"
+  [ngStyle]="{
+    backgroundColor: chipBackgroundColor
+  }"
+>
+  {{ cellValue }}
+</span>
+
+<ng-container *ngIf="column.image">
+  <img
+    [src]="imgSrc"
+    [width]="column.image.width"
+    [height]="column.image.height"
+  />
+</ng-container>
+
+<!-- Displaying a menu -->
+<ng-container *ngIf="column.menu">
+  <!-- cellValue is supposed to be an array in case of menu -->
+  <button
+    [disabled]="!cellValue.length"
+    mat-stroked-button
+    [matMenuTriggerFor]="menu"
+  >
+    {{ column.menu.label ?? column.label }}
+  </button>
+  <mat-menu #menu="matMenu">
+    <button *ngFor="let item of cellValue" mat-menu-item>
+      {{ item[column.menu.dataKey] }}
+    </button>
+  </mat-menu>
+</ng-container>
+
+<!-- Display icon in cell -->
+
+<ng-template
+  *ngIf="column.icon && cellValue && !column.icon.onClick"
+  [ngTemplateOutlet]="icon"
+></ng-template>
+
+<button
+  mat-icon-button
+  *ngIf="column.icon && column.icon.onClick"
+  (click)="column.icon.onClick(row)"
+  [disabled]="column.icon.isDisabled && column.icon.isDisabled(row)"
+  disableRipple
+>
+  <ng-template [ngTemplateOutlet]="icon"></ng-template>
+</button>
+
+<ng-template #icon>
+  <mat-icon
+    class="cell-icon"
+    [ngStyle]="{
+      color: iconColor
+    }"
+    [color]="
+      iconColor
+        ? ''
+        : column.icon?.isDisabled && column.icon?.isDisabled(row)
+        ? 'disabled'
+        : 'primary'
+    "
+    [matTooltip]="iconTooltip"
+    [matTooltipDisabled]="!iconTooltip"
+    [matTooltipPosition]="column.icon?.tooltipPosition ?? 'above'"
+  >
+    >{{ cellIcon }}</mat-icon
+  >
+</ng-template>
