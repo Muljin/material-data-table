@@ -16,12 +16,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BackgroundBlurComponent } from './components/background-blur/background-blur.component';
-import { DataTableComponent } from './components/data-table/data-table.component';
+import { CardComponent } from './components/card/card.component';
+import {
+  DataTableComponent,
+  TableFilterComponent,
+} from './components/data-table/data-table.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TableActionComponent } from './components/table-action/table-action.component';
 import { TableCellComponent } from './components/table-cell/table-cell.component';
-import { TableFilterComponent } from './components/table-filter/table-filter.component';
-import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
