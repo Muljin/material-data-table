@@ -1,1 +1,25 @@
-<p>table-action works!</p>
+<ng-container *ngIf="action && row">
+  <button
+    *ngIf="!action.hideLabel; else iconButton"
+    mat-button
+    [color]="action?.color ?? 'primary'"
+    (click)="action.onClick(row)"
+    [disabled]="action.disableWhen && action.disableWhen(row)"
+  >
+    <mat-icon *ngIf="action.icon">{{ action.icon }}</mat-icon>
+    {{ action.label }}
+  </button>
+
+  <ng-template #iconButton>
+    <button
+      [disabled]="action.disableWhen && action.disableWhen(row)"
+      mat-icon-button
+      [matTooltip]="action.label"
+      matTooltipPosition="above"
+      [color]="action?.color ?? 'primary'"
+      (click)="action.onClick(row)"
+    >
+      <mat-icon *ngIf="action.icon">{{ action.icon }}</mat-icon>
+    </button>
+  </ng-template>
+</ng-container>
