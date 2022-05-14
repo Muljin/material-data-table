@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -40,6 +41,7 @@ import { TableFilterComponent } from './components/table-filter/table-filter.com
     MatPaginatorModule,
     MatSortModule,
     MatTooltipModule,
+    ReactiveFormsModule,
   ],
   exports: [DataTableComponent],
 })
