@@ -1,0 +1,28 @@
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  & .reset-button {
+    margin-top: 10px;
+  }
+}
+
+.filters-dialog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-input {
+  font-size: 13px;
+  margin-right: 7px;
+}
+
+.filter-dialog-input {
+  margin-bottom: 10px;
+}
+
+.reset-button {
+  height: 100%;
+}

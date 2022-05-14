@@ -1,6 +1,6 @@
 import { ThemePalette } from '@angular/material/core';
 
-export type AlfredTableAction = {
+export type TableAction = {
   label: string;
   color?: ThemePalette;
   icon?: string;

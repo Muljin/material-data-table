@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "@muljin/data-table": {
+    "@muljin/material-components": {
       "projectType": "library",
-      "root": "projects/data-table",
-      "sourceRoot": "projects/data-table/src",
+      "root": "projects/material-components",
+      "sourceRoot": "projects/material-components/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/data-table/ng-package.json"
+            "project": "projects/material-components/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/data-table/tsconfig.lib.prod.json"
+              "tsConfig": "projects/material-components/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/data-table/tsconfig.lib.json"
+              "tsConfig": "projects/material-components/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -27,13 +27,13 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/data-table/src/test.ts",
-            "tsConfig": "projects/data-table/tsconfig.spec.json",
-            "karmaConfig": "projects/data-table/karma.conf.js"
+            "main": "projects/material-components/src/test.ts",
+            "tsConfig": "projects/material-components/tsconfig.spec.json",
+            "karmaConfig": "projects/material-components/karma.conf.js"
           }
         }
       }
     }
   },
-  "defaultProject": "@muljin/data-table"
+  "defaultProject": "@muljin/material-components"
 }
