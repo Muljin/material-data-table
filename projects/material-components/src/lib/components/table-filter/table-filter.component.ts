@@ -8,8 +8,8 @@ import {
   Output,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { TableColumn } from 'dist/muljin/data-table/public-api';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
+import { TableColumn } from '../../../public-api';
 
 @Component({
   selector: 'table-filter',
