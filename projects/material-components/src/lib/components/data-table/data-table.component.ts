@@ -4,6 +4,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -19,9 +20,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import { TableAction } from '../../types/table-action';
 import { TableColumn } from '../../types/table-column';
-import { TableFilterComponent } from '../table-filter/table-filter.component';
 
 @Component({
   selector: 'muljin-data-table',
@@ -173,5 +174,47 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     instance.filterColumns = this.filterColumns;
     instance.filterFormGroup = this.filtersFormGroup!;
     instance.isDialog = true;
+  }
+}
+
+@Component({
+  selector: 'table-filter',
+  templateUrl: '../table-filter/table-filter.component.html',
+  styleUrls: ['../table-filter/table-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class TableFilterComponent implements OnInit, OnDestroy {
+  @Input() filterFormGroup!: FormGroup;
+  @Input() filterColumns: TableColumn[] = [];
+  @Input() isDialog = false;
+  @Input() isClientSideFilter = false;
+
+  @Output() filterChange = new EventEmitter();
+
+  private readonly _sub = new Subscription();
+
+  ngOnInit(): void {
+    this._setupChangeStream(this.filterFormGroup);
+  }
+
+  private _setupChangeStream(formGroup: FormGroup): void {
+    this._sub.add(
+      formGroup.valueChanges
+        .pipe(
+          debounceTime(this.isClientSideFilter ? 0 : 200),
+          distinctUntilChanged(
+            (a, b) => JSON.stringify(a) === JSON.stringify(b)
+          )
+        )
+        .subscribe((value) => this.filterChange.emit(value))
+    );
+  }
+
+  resetFilters(): void {
+    this.filterFormGroup.reset();
+  }
+
+  ngOnDestroy(): void {
+    this._sub.unsubscribe();
   }
 }
