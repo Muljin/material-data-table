@@ -74,39 +74,35 @@ export class DataTableComponent implements OnInit, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] && !changes['data'].firstChange) {
-      this._setTableConfiguration(true);
+      this._setTableConfiguration();
       if (this.isClientSide) {
         this.dataSource.paginator = this.paginator;
       }
     }
+
+    if (changes['pageIndex'] && this.pageIndex) {
+      this.pageIndex--;
+    }
   }
 
-  private _setTableConfiguration(refresh?: boolean): void {
+  private _setTableConfiguration(): void {
     this.displayedColumns = this.columns.map((column) => column.dataKey);
     if (this.actions.length > 0) {
       this.displayedColumns = [...this.displayedColumns, 'actions'];
     }
-    // checking if the data is paginated from the backend or directly comes as array from the backend
+
     if (this.data) {
-      this._setTableData(this.data, refresh);
+      this._setTableData(this.data);
     }
     this.dataSource.sort = this.sort;
   }
 
-  private _setTableData(data: any[], refresh?: boolean): void {
-    if (refresh) {
-      this.dataSource.data = data;
-    } else {
-      this.dataSource = new MatTableDataSource(data);
-    }
+  private _setTableData(data: any[]): void {
+    this.dataSource = new MatTableDataSource(data);
     if (!this.pageSize) {
-      this.pageSize = this.pageSizes[0];
-    }
-    if (!this.pageIndex) {
-      this.pageIndex = 0;
-    }
-    if (!this.totalRecords) {
-      this.totalRecords = data.length;
+      this.pageSize = this.isClientSide
+        ? this.pageSizes[0]
+        : this.dataSource.data.length;
     }
   }
 
@@ -155,6 +151,8 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   }
 
   onPageChange(event: PageEvent): void {
+    // start from 1 instead of 0
+    event.pageIndex++;
     this.pageChange.emit(event);
   }
 
