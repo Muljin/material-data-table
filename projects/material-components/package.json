@@ -3,7 +3,7 @@
   "repository": "https://github.com/Muljin/material-data-table.git",
   "author": "Ayoub Alfurjani",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "peerDependencies": {
     "@angular/common": "^13.3.0",
     "@angular/core": "^13.3.0",

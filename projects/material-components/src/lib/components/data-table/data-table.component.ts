@@ -55,6 +55,9 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   filterColumns: TableColumn[] = [];
   filtersFormGroup: FormGroup | null = null;
 
+  // whether the client side filter is shown right now, so if new data comes in, we can react to it so we don't reset the filter
+  isFilteredData = false;
+
   constructor(
     private readonly _fb: FormBuilder,
     private readonly _dialog: MatDialog
@@ -74,39 +77,44 @@ export class DataTableComponent implements OnInit, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] && !changes['data'].firstChange) {
-      this._setTableConfiguration(true);
+      this._setTableConfiguration();
       if (this.isClientSide) {
         this.dataSource.paginator = this.paginator;
       }
     }
+
+    if (changes['pageIndex'] && this.pageIndex) {
+      this.pageIndex--;
+    }
   }
 
-  private _setTableConfiguration(refresh?: boolean): void {
+  private _setTableConfiguration(): void {
     this.displayedColumns = this.columns.map((column) => column.dataKey);
     if (this.actions.length > 0) {
       this.displayedColumns = [...this.displayedColumns, 'actions'];
     }
-    // checking if the data is paginated from the backend or directly comes as array from the backend
-    if (this.data) {
-      this._setTableData(this.data, refresh);
+
+    if (this.data && !this.isFilteredData) {
+      this._setTableData(this.data);
     }
     this.dataSource.sort = this.sort;
   }
 
-  private _setTableData(data: any[], refresh?: boolean): void {
-    if (refresh) {
-      this.dataSource.data = data;
-    } else {
-      this.dataSource = new MatTableDataSource(data);
-    }
+  private _setTableData(data: any[]): void {
+    this.dataSource = new MatTableDataSource(data);
     if (!this.pageSize) {
-      this.pageSize = this.pageSizes[0];
+      this.pageSize = this.isClientSide
+        ? this.pageSizes[0]
+        : this.dataSource.data.length;
     }
-    if (!this.pageIndex) {
-      this.pageIndex = 0;
-    }
-    if (!this.totalRecords) {
-      this.totalRecords = data.length;
+
+    // if the data array is empty and it's not the first page then emit a page event with the first page
+    if (data.length === 0 && this.pageIndex !== 0) {
+      this.pageChange.emit({
+        length: this.totalRecords ?? this.pageSize,
+        pageIndex: 1,
+        pageSize: this.pageSize,
+      });
     }
   }
 
@@ -155,12 +163,15 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   }
 
   onPageChange(event: PageEvent): void {
+    // start from 1 instead of 0
+    event.pageIndex++;
     this.pageChange.emit(event);
   }
 
   onFilterChange(event: any): void {
     if (this.isClientSide) {
       this._clientSideFilter(event);
+      this.isFilteredData = Object.values(event).length ? true : false;
     } else {
       this.filterChange.emit(event);
     }

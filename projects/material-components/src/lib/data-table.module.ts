@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,8 +14,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BackgroundBlurComponent } from './components/background-blur/background-blur.component';
 import { CardComponent } from './components/card/card.component';
 import {
@@ -36,8 +35,7 @@ import { TableCellComponent } from './components/table-cell/table-cell.component
     CardComponent,
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    CommonModule,
     MatMenuModule,
     MatIconModule,
     MatButtonModule,

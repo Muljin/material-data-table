@@ -4,7 +4,7 @@
     [ngClass]="{ link: column.link }"
     (click)="column.link && column.link.onClick(row)"
   >
-    {{ cellValue }}
+    {{ templateValue }}
   </span>
 </ng-container>
 
@@ -16,7 +16,7 @@
     backgroundColor: chipBackgroundColor
   }"
 >
-  {{ cellValue }}
+  {{ templateValue }}
 </span>
 
 <ng-container *ngIf="column.image">
@@ -78,6 +78,6 @@
     [matTooltipDisabled]="!iconTooltip"
     [matTooltipPosition]="column.icon?.tooltipPosition ?? 'above'"
   >
-    >{{ cellIcon }}</mat-icon
+    {{ cellIcon }}</mat-icon
   >
 </ng-template>
