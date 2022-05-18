@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'spinner',
+  selector: 'muljin-spinner',
   template: `
     <mat-spinner [diameter]="diameter" color="accent"></mat-spinner>
   `,

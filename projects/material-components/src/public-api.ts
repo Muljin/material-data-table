@@ -1,9 +1,5 @@
-/*
- * Public API Surface of data-table
- */
-
-export * from './lib/components/data-table/data-table.component';
-export * from './lib/data-table.module';
-export * from './lib/types/table-action';
-export * from './lib/types/table-column';
-export * from './lib/types/table-image';
+export * from '@muljin/material-components/src/lib/blur-spinner';
+export * from '@muljin/material-components/src/lib/card';
+export * from '@muljin/material-components/src/lib/data-table';
+export * from '@muljin/material-components/src/lib/spinner';
+export * from '@muljin/material-components/src/lib/types';

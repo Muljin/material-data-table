@@ -1,0 +1,11 @@
+:host {
+  pointer-events: all;
+  z-index: 1;
+  border: none;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  cursor: wait;
+  position: absolute;
+}
