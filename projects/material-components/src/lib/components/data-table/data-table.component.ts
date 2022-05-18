@@ -55,6 +55,9 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   filterColumns: TableColumn[] = [];
   filtersFormGroup: FormGroup | null = null;
 
+  // whether the client side filter is shown right now, so if new data comes in, we can react to it so we don't reset the filter
+  isFilteredData = false;
+
   constructor(
     private readonly _fb: FormBuilder,
     private readonly _dialog: MatDialog
@@ -91,7 +94,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
       this.displayedColumns = [...this.displayedColumns, 'actions'];
     }
 
-    if (this.data) {
+    if (this.data && !this.isFilteredData) {
       this._setTableData(this.data);
     }
     this.dataSource.sort = this.sort;
@@ -103,6 +106,15 @@ export class DataTableComponent implements OnInit, AfterViewInit {
       this.pageSize = this.isClientSide
         ? this.pageSizes[0]
         : this.dataSource.data.length;
+    }
+
+    // if the data array is empty and it's not the first page then emit a page event with the first page
+    if (data.length === 0 && this.pageIndex !== 0) {
+      this.pageChange.emit({
+        length: this.totalRecords ?? this.pageSize,
+        pageIndex: 1,
+        pageSize: this.pageSize,
+      });
     }
   }
 
@@ -159,6 +171,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   onFilterChange(event: any): void {
     if (this.isClientSide) {
       this._clientSideFilter(event);
+      this.isFilteredData = Object.values(event).length ? true : false;
     } else {
       this.filterChange.emit(event);
     }
