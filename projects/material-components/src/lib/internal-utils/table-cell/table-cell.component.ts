@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TableColumn } from '../../types/table-column';
+import { TableColumn } from '@muljin/material-components/src/lib/types';
 
 @Component({
-  selector: 'table-cell',
+  selector: 'muljin-table-cell',
   templateUrl: './table-cell.component.html',
   styleUrls: ['./table-cell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

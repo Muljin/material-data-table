@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/material-components",
       "sourceRoot": "projects/material-components/src",
-      "prefix": "lib",
+      "prefix": "muljin",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -31,9 +31,21 @@
             "tsConfig": "projects/material-components/tsconfig.spec.json",
             "karmaConfig": "projects/material-components/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/material-components/**/*.ts",
+              "projects/material-components/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "@muljin/material-components"
+  "defaultProject": "@muljin/material-components",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

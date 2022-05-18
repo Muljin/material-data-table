@@ -3,9 +3,13 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@muljin/data-table": [
-        "dist/data-table/muljin-data-table",
-        "dist/data-table"
+      "@muljin/material-components/*": [
+        "projects/material-components/*",
+        "projects/material-components"
+      ],
+      "@muljin/material-components": [
+        "projects/material-components/*",
+        "projects/material-components"
       ]
     },
     "baseUrl": "./",

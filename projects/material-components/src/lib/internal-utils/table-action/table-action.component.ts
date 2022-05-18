@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TableAction } from '../../types/table-action';
+import { TableAction } from '@muljin/material-components/src/lib/types';
 
 @Component({
-  selector: 'table-action',
+  selector: 'muljin-table-action',
   templateUrl: './table-action.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
