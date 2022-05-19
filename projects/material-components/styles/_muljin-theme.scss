@@ -1,0 +1,14 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@mixin theme($theme) {
+  $background: map.get($theme, background);
+
+  .card-background {
+    background: mat.get-color-from-palette($background, card);
+  }
+
+  .blurry-background {
+    background: mat.get-color-from-palette($background, card, 0.6);
+  }
+}
