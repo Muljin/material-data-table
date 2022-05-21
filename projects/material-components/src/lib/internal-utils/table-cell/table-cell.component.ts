@@ -16,7 +16,7 @@ export class TableCellComponent {
   }
 
   get templateValue() {
-    if (this.cellValue) {
+    if (this.cellValue != null) {
       if (this.column.valueFormatter) {
         return this.column.valueFormatter(this.cellValue);
       } else if (this.column.valueMerger) {

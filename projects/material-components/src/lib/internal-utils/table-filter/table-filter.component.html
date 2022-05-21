@@ -13,12 +13,12 @@
         <input
           *ngIf="column.filter?.type === 'text'"
           matInput
-          [formControlName]="column.dataKey"
+          [formControlName]="column.filter?.controlName ?? column.dataKey"
         />
 
         <!-- Select input -->
         <mat-select
-          [formControlName]="column.dataKey"
+          [formControlName]="column.filter?.controlName ?? column.dataKey"
           *ngIf="column.filter?.type === 'select' && column.filter?.options"
         >
           <mat-option
