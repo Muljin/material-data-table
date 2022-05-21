@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -24,6 +26,8 @@ import { DataTableComponent } from './data-table.component';
     MatSortModule,
     CardModule,
     BlurSpinnerModule,
+    MatButtonModule,
+    MatDialogModule,
   ],
   exports: [DataTableComponent],
 })

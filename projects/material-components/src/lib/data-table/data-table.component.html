@@ -58,7 +58,7 @@
 
   <mat-paginator
     #paginator
-    *ngIf="pagination"
+    [ngStyle]="{ visibility: pagination ? 'visible' : 'hidden' }"
     [length]="totalRecords ?? data?.length"
     [pageSize]="pageSize"
     [pageIndex]="pageIndex ?? 0"

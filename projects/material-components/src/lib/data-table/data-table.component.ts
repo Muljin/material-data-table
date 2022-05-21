@@ -110,6 +110,10 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
         : this.dataSource.data.length;
     }
 
+    if (!this.pagination) {
+      this.pageSize = this.dataSource.data.length;
+    }
+
     // if the data array is empty and it's not the first page then emit a page event with the first page
     if (data.length === 0 && this.pageIndex !== 0) {
       this.pageChange.emit({
