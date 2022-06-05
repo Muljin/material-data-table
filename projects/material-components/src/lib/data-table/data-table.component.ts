@@ -12,9 +12,9 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -55,13 +55,13 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = [];
   filterColumns: TableColumn[] = [];
-  filtersFormGroup: FormGroup | null = null;
+  filtersFormGroup: UntypedFormGroup | null = null;
 
   // whether the client side filter is shown right now, so if new data comes in, we can react to it so we don't reset the filter
   isFilteredData = false;
 
   constructor(
-    private readonly _fb: FormBuilder,
+    private readonly _fb: UntypedFormBuilder,
     private readonly _dialog: MatDialog
   ) {}
 
@@ -135,7 +135,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
 
     //create the controls for each filter
     for (const a of filters) {
-      controls[a.filter?.controlName ?? a.dataKey] = new FormControl('');
+      controls[a.filter?.controlName ?? a.dataKey] = new UntypedFormControl('');
     }
 
     if (Object.keys(controls).length > 0) {

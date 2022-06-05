@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { TableColumn } from '@muljin/material-components/src/lib/types';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 
@@ -18,7 +18,7 @@ import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableFilterComponent implements OnInit, OnDestroy {
-  @Input() filterFormGroup!: FormGroup;
+  @Input() filterFormGroup!: UntypedFormGroup;
   @Input() filterColumns: TableColumn[] = [];
   @Input() isDialog = false;
   @Input() isClientSideFilter = false;
@@ -31,7 +31,7 @@ export class TableFilterComponent implements OnInit, OnDestroy {
     this._setupChangeStream(this.filterFormGroup);
   }
 
-  private _setupChangeStream(formGroup: FormGroup): void {
+  private _setupChangeStream(formGroup: UntypedFormGroup): void {
     this._sub.add(
       formGroup.valueChanges
         .pipe(

@@ -44,8 +44,9 @@
       }
     }
   },
-  "defaultProject": "@muljin/material-components",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
