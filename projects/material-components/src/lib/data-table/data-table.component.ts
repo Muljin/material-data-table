@@ -12,9 +12,9 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
+  FormBuilder,
+  FormControl,
+  FormGroup,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -44,6 +44,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() totalRecords: number | null = null;
   @Input() pageIndex: number | null = null;
   @Input() isClientSide = false;
+  @Input() initialFilterValues: any = null;
 
   @Output() rowSelect = new EventEmitter<any>();
   @Output() pageChange = new EventEmitter<PageEvent>();
@@ -55,13 +56,13 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = [];
   filterColumns: TableColumn[] = [];
-  filtersFormGroup: UntypedFormGroup | null = null;
+  filtersFormGroup: FormGroup | null = null;
 
   // whether the client side filter is shown right now, so if new data comes in, we can react to it so we don't reset the filter
   isFilteredData = false;
 
   constructor(
-    private readonly _fb: UntypedFormBuilder,
+    private readonly _fb: FormBuilder,
     private readonly _dialog: MatDialog
   ) {}
 
@@ -135,7 +136,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
 
     //create the controls for each filter
     for (const a of filters) {
-      controls[a.filter?.controlName ?? a.dataKey] = new UntypedFormControl('');
+      controls[a.filter?.controlName ?? a.dataKey] = new FormControl('');
     }
 
     if (Object.keys(controls).length > 0) {

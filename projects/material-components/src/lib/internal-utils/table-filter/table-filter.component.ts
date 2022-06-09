@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { TableColumn } from '@muljin/material-components/src/lib/types';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 
@@ -18,10 +18,11 @@ import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableFilterComponent implements OnInit, OnDestroy {
-  @Input() filterFormGroup!: UntypedFormGroup;
+  @Input() filterFormGroup!: FormGroup;
   @Input() filterColumns: TableColumn[] = [];
   @Input() isDialog = false;
   @Input() isClientSideFilter = false;
+  @Input() initialFilterValues: any = null;
 
   @Output() filterChange = new EventEmitter();
 
@@ -29,9 +30,20 @@ export class TableFilterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._setupChangeStream(this.filterFormGroup);
+    for (const key in this.initialFilterValues) {
+      if (this.filterFormGroup.value.hasOwnProperty(key)) {
+        this.filterFormGroup.controls[key].setValue(
+          this.initialFilterValues[key],
+          {
+            emitEvent: false,
+          }
+        );
+        this.filterFormGroup.controls[key].markAsDirty();
+      }
+    }
   }
 
-  private _setupChangeStream(formGroup: UntypedFormGroup): void {
+  private _setupChangeStream(formGroup: FormGroup): void {
     this._sub.add(
       formGroup.valueChanges
         .pipe(
