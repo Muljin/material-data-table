@@ -4,6 +4,7 @@
   <h2 *ngIf="title" class="table-title">{{ title }}</h2>
   <div class="filters-container" *ngIf="filtersFormGroup">
     <muljin-table-filter
+      [initialFilterValues]="initialFilterValues"
       [filterColumns]="filterColumns"
       [filterFormGroup]="filtersFormGroup"
       [isClientSideFilter]="isClientSide"

@@ -44,6 +44,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() totalRecords: number | null = null;
   @Input() pageIndex: number | null = null;
   @Input() isClientSide = false;
+  @Input() initialFilterValues: any = null;
 
   @Output() rowSelect = new EventEmitter<any>();
   @Output() pageChange = new EventEmitter<PageEvent>();

@@ -3,17 +3,17 @@
   "repository": "https://github.com/Muljin/material-data-table.git",
   "author": "Ayoub Alfurjani",
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "exports": {
     ".": {
       "sass": "./styles/_muljin-theme.scss"
     }
   },
   "peerDependencies": {
-    "@angular/common": "^13.3.0",
-    "@angular/core": "^13.3.0",
-    "@angular/material": "^13.3.0",
-    "@angular/cdk": "^13.3.0"
+    "@angular/common": "^14.0.0",
+    "@angular/core": "^14.0.0",
+    "@angular/material": "^14.0.0",
+    "@angular/cdk": "^14.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

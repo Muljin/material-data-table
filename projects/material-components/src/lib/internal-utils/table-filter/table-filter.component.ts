@@ -22,6 +22,7 @@ export class TableFilterComponent implements OnInit, OnDestroy {
   @Input() filterColumns: TableColumn[] = [];
   @Input() isDialog = false;
   @Input() isClientSideFilter = false;
+  @Input() initialFilterValues: any = null;
 
   @Output() filterChange = new EventEmitter();
 
@@ -29,6 +30,17 @@ export class TableFilterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._setupChangeStream(this.filterFormGroup);
+    for (const key in this.initialFilterValues) {
+      if (this.filterFormGroup.value.hasOwnProperty(key)) {
+        this.filterFormGroup.controls[key].setValue(
+          this.initialFilterValues[key],
+          {
+            emitEvent: false,
+          }
+        );
+        this.filterFormGroup.controls[key].markAsDirty();
+      }
+    }
   }
 
   private _setupChangeStream(formGroup: FormGroup): void {
