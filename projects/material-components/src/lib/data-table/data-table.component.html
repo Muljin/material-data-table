@@ -16,7 +16,14 @@
     </button>
   </div>
   <div class="table-responsive">
-    <table [dataSource]="dataSource" mat-table matSort aria-label="Elements">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      cdkDropList
+      matSort
+      (cdkDropListDropped)="dropTable($event)"
+      aria-label="Elements"
+    >
       <ng-container
         *ngFor="let column of columns"
         [matColumnDef]="column.dataKey"
@@ -46,11 +53,25 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns"
-        (click)="onRowSelect(row)"
-      ></tr>
+
+      <ng-container *ngIf="dragAndDrop; else withoutDragAndDrop">
+        <tr
+          class="draggable-cursor"
+          mat-row
+          cdkDrag
+          (cdkDragDropped)="onDropRow($event, row)"
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="onRowSelect(row)"
+        ></tr>
+      </ng-container>
+
+      <ng-template #withoutDragAndDrop>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="onRowSelect(row)"
+        ></tr>
+      </ng-template>
     </table>
   </div>
   <div class="table-no-data" *ngIf="!data?.length">

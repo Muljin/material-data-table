@@ -11,4 +11,8 @@
   .blurry-background {
     background: mat.get-color-from-palette($background, card, 0.6);
   }
+
+  .cdk-drag-preview {
+    background: mat.get-color-from-palette($background, card);
+  }
 }

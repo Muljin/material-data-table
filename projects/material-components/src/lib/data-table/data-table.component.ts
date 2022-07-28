@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -19,7 +20,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { TableFilterComponent } from '@muljin/material-components/src/lib/internal-utils/table-filter';
 import {
   TableAction,
@@ -33,6 +34,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
+  @ViewChild(MatTable) table!: MatTable<any>;
+
   @Input() columns: TableColumn[] = [];
   @Input() actions: TableAction[] = [];
   @Input() data: Array<any> | null = null;
@@ -45,8 +48,10 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() pageIndex: number | null = null;
   @Input() isClientSide = false;
   @Input() initialFilterValues: any = null;
+  @Input() dragAndDrop = false;
 
   @Output() rowSelect = new EventEmitter<any>();
+  @Output() dropRow = new EventEmitter<{ event: CdkDragDrop<any>; row: any }>();
   @Output() pageChange = new EventEmitter<PageEvent>();
   @Output() filterChange = new EventEmitter();
 
@@ -165,8 +170,20 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
     this.dataSource.paginator?.firstPage();
   }
 
+  // dropTable will just rearrange the rows while onDropRow will emit the event
+  dropTable(event: CdkDragDrop<any[]>): void {
+    const prev = this.dataSource.data;
+    moveItemInArray(prev, event.previousIndex, event.currentIndex);
+    this.dataSource.data = prev;
+    this.table.renderRows();
+  }
+
   onRowSelect(row: any): void {
     this.rowSelect.emit(row);
+  }
+
+  onDropRow(event: CdkDragDrop<any>, row: any) {
+    this.dropRow.emit({ event, row });
   }
 
   onPageChange(event: PageEvent): void {
