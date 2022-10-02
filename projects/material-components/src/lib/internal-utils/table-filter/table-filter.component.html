@@ -3,7 +3,7 @@
   <div [ngClass]="isDialog ? 'filters-dialog-container' : 'filters-container'">
     <div
       [ngClass]="{ 'filter-dialog-input': isDialog }"
-      class="filter-input"
+      class="filter-input-container"
       *ngFor="let column of filterColumns"
     >
       <mat-form-field appearance="outline">

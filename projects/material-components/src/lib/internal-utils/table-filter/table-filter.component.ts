@@ -1,3 +1,4 @@
+import { NgClass, NgForOf, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,12 +8,29 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { TableColumn } from '@muljin/material-components/src/lib/types';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 
 @Component({
   selector: 'muljin-table-filter',
+  standalone: true,
+  imports: [
+    NgIf,
+    NgClass,
+    NgForOf,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+  ],
   templateUrl: './table-filter.component.html',
   styleUrls: ['./table-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

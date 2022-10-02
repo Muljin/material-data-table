@@ -1,7 +1,13 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  DragDropModule,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import { NgForOf, NgIf, NgStyle } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -17,10 +23,24 @@ import {
   FormControl,
   FormGroup,
 } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import {
+  MatPaginator,
+  MatPaginatorModule,
+  PageEvent,
+} from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import {
+  MatTable,
+  MatTableDataSource,
+  MatTableModule,
+} from '@angular/material/table';
+import { BlurSpinnerComponent } from '@muljin/material-components/src/lib/blur-spinner';
+import { CardComponent } from '@muljin/material-components/src/lib/card';
+import { TableActionComponent } from '@muljin/material-components/src/lib/internal-utils/table-action';
+import { TableCellComponent } from '@muljin/material-components/src/lib/internal-utils/table-cell';
 import { TableFilterComponent } from '@muljin/material-components/src/lib/internal-utils/table-filter';
 import {
   TableAction,
@@ -29,6 +49,24 @@ import {
 
 @Component({
   selector: 'muljin-data-table',
+  standalone: true,
+  imports: [
+    NgIf,
+    NgStyle,
+    NgForOf,
+    MatPaginatorModule,
+    MatTableModule,
+    MatIconModule,
+    TableActionComponent,
+    TableFilterComponent,
+    TableCellComponent,
+    MatSortModule,
+    CardComponent,
+    BlurSpinnerComponent,
+    MatButtonModule,
+    MatDialogModule,
+    DragDropModule,
+  ],
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -68,7 +106,8 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   constructor(
     private readonly _fb: FormBuilder,
-    private readonly _dialog: MatDialog
+    private readonly _dialog: MatDialog,
+    private readonly _changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -80,6 +119,10 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
     // attaching the paginator only if the data is not paginated from the backend
     if (this.isClientSide) {
       this.dataSource.paginator = this.paginator;
+    }
+
+    if (!this.pagination) {
+      this.pageSize = this.dataSource.data.length;
     }
   }
 
@@ -104,6 +147,7 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
 
     if (this.data && !this.isFilteredData) {
       this._setTableData(this.data);
+      this._changeDetectorRef.markForCheck();
     }
     this.dataSource.sort = this.sort;
   }
