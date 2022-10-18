@@ -11,7 +11,7 @@
       (filterChange)="onFilterChange($event)"
     ></muljin-table-filter>
     <button mat-raised-button color="primary" (click)="openFilterDialog()">
-      Filters
+      {{ _intl.filtersLabel }}
       <mat-icon class="btn-icon">filter_list</mat-icon>
     </button>
   </div>
@@ -42,7 +42,7 @@
       </ng-container>
 
       <ng-container *ngIf="actions.length > 0" matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <th mat-header-cell *matHeaderCellDef>{{ _intl.actionsLabel }}</th>
         <td mat-cell *matCellDef="let row">
           <muljin-table-action
             *ngFor="let action of actions"
@@ -75,7 +75,7 @@
     </table>
   </div>
   <div class="table-no-data" *ngIf="!data?.length">
-    <h4>There is no data to display.</h4>
+    <h4>{{ _intl.tableNoDataToDisplay }}</h4>
   </div>
 
   <mat-paginator

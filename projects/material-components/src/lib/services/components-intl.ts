@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional, SkipSelf } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -16,3 +16,16 @@ export class ComponentsIntl {
 
   tableNoDataToDisplay = 'There is no data to display.';
 }
+
+export function MULJIN_COMPONENT_INTL_PROVIDER_FACTORY(
+  parentIntl: ComponentsIntl
+) {
+  return parentIntl || new ComponentsIntl();
+}
+
+export const MULJIN_COMPONENT_INTL_PROVIDER = {
+  // If there is already an ComponentsIntl available, use that. Otherwise, provide a new one.
+  provide: ComponentsIntl,
+  deps: [[new Optional(), new SkipSelf(), ComponentsIntl]],
+  useFactory: MULJIN_COMPONENT_INTL_PROVIDER_FACTORY,
+};
