@@ -1,8 +1,24 @@
+import { NgClass, NgForOf, NgIf, NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { TableColumn } from '@muljin/material-components/src/lib/types';
 
 @Component({
   selector: 'muljin-table-cell',
+  standalone: true,
+  imports: [
+    NgClass,
+    NgStyle,
+    NgIf,
+    NgForOf,
+    MatMenuModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatButtonModule,
+  ],
   templateUrl: './table-cell.component.html',
   styleUrls: ['./table-cell.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

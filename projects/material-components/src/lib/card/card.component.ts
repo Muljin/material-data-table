@@ -1,7 +1,10 @@
+import { NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'muljin-card',
+  standalone: true,
+  imports: [NgStyle],
   template: `
     <div
       class="card card-background"
