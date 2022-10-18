@@ -3,7 +3,7 @@
   "repository": "https://github.com/Muljin/material-data-table.git",
   "author": "Ayoub Alfurjani",
   "license": "MIT",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "exports": {
     ".": {
       "sass": "./styles/_muljin-theme.scss"
