@@ -1,4 +1,4 @@
-<h2 *ngIf="isDialog">Filters</h2>
+<h2 *ngIf="isDialog">{{ _intl.filtersLabel }}</h2>
 <form [formGroup]="filterFormGroup">
   <div [ngClass]="isDialog ? 'filters-dialog-container' : 'filters-container'">
     <div
@@ -38,18 +38,18 @@
       class="reset-button"
       (click)="resetFilters()"
     >
-      Reset
+      {{ _intl.filtersDialogReset }}
     </button>
   </div>
 </form>
 
 <div mat-dialog-actions *ngIf="isDialog">
-  <button mat-button mat-dialog-close>OK</button>
+  <button mat-button mat-dialog-close>{{ _intl.filtersDialogOk }}</button>
   <button
     mat-button
     [disabled]="filterFormGroup.pristine"
     (click)="resetFilters()"
   >
-    Reset
+    {{ _intl.filtersDialogReset }}
   </button>
 </div>

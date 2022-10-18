@@ -12,6 +12,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -43,9 +44,14 @@ import { TableActionComponent } from '@muljin/material-components/src/lib/intern
 import { TableCellComponent } from '@muljin/material-components/src/lib/internal-utils/table-cell';
 import { TableFilterComponent } from '@muljin/material-components/src/lib/internal-utils/table-filter';
 import {
+  ComponentsIntl,
+  MULJIN_COMPONENT_INTL_PROVIDER,
+} from '@muljin/material-components/src/lib/services';
+import {
   TableAction,
   TableColumn,
 } from '@muljin/material-components/src/lib/types';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'muljin-data-table',
@@ -67,11 +73,14 @@ import {
     MatDialogModule,
     DragDropModule,
   ],
+  providers: [MULJIN_COMPONENT_INTL_PROVIDER],
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
+export class DataTableComponent
+  implements OnInit, AfterViewInit, OnChanges, OnDestroy
+{
   @ViewChild(MatTable) table!: MatTable<any>;
 
   @Input() columns: TableColumn[] = [];
@@ -101,14 +110,21 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
   filterColumns: TableColumn[] = [];
   filtersFormGroup: FormGroup | null = null;
 
+  private _intlChanges: Subscription;
+
   // whether the client side filter is shown right now, so if new data comes in, we can react to it so we don't reset the filter
   isFilteredData = false;
 
   constructor(
     private readonly _fb: FormBuilder,
     private readonly _dialog: MatDialog,
-    private readonly _changeDetectorRef: ChangeDetectorRef
-  ) {}
+    private readonly _changeDetectorRef: ChangeDetectorRef,
+    public _intl: ComponentsIntl
+  ) {
+    this._intlChanges = _intl.changes.subscribe(() =>
+      this._changeDetectorRef.markForCheck()
+    );
+  }
 
   ngOnInit(): void {
     this._setFilterGroup();
@@ -253,5 +269,9 @@ export class DataTableComponent implements OnInit, AfterViewInit, OnChanges {
     instance.filterColumns = this.filterColumns;
     instance.filterFormGroup = this.filtersFormGroup!;
     instance.isDialog = true;
+  }
+
+  ngOnDestroy() {
+    this._intlChanges.unsubscribe();
   }
 }
