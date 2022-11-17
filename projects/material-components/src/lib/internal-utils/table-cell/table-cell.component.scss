@@ -6,6 +6,11 @@
 
 .link {
   text-decoration: underline;
+  display: inline-block;
+  max-width: 250px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   &:hover {
     cursor: pointer;
   }

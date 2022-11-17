@@ -47,6 +47,7 @@ export class TableFilterComponent implements OnInit, OnDestroy {
   @Input() isDialog = false;
   @Input() isClientSideFilter = false;
   @Input() initialFilterValues: any = null;
+  @Input() loading?: boolean | null = false;
 
   @Output() filterChange = new EventEmitter();
 
