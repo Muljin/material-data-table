@@ -6,7 +6,7 @@
       class="filter-input-container"
       *ngFor="let column of filterColumns"
     >
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
         <mat-label>{{ column.filter?.inputLabel ?? column.label }}</mat-label>
 
         <!-- Normal text input -->
@@ -33,9 +33,8 @@
 
     <button
       *ngIf="!isDialog"
-      [disabled]="filterFormGroup.pristine"
+      [disabled]="filterFormGroup.pristine || loading"
       mat-button
-      class="reset-button"
       (click)="resetFilters()"
     >
       {{ _intl.filtersDialogReset }}

@@ -1,7 +1,7 @@
 import {
   CdkDragDrop,
   DragDropModule,
-  moveItemInArray,
+  moveItemInArray
 } from '@angular/cdk/drag-drop';
 import { NgForOf, NgIf, NgStyle } from '@angular/common';
 import {
@@ -16,40 +16,40 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormControl,
-  FormGroup,
+  FormGroup
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import {
   MatPaginator,
   MatPaginatorModule,
-  PageEvent,
+  PageEvent
 } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import {
   MatTable,
   MatTableDataSource,
-  MatTableModule,
+  MatTableModule
 } from '@angular/material/table';
 import { BlurSpinnerComponent } from '@muljin/material-components/src/lib/blur-spinner';
-import { CardComponent } from '@muljin/material-components/src/lib/card';
 import { TableActionComponent } from '@muljin/material-components/src/lib/internal-utils/table-action';
 import { TableCellComponent } from '@muljin/material-components/src/lib/internal-utils/table-cell';
 import { TableFilterComponent } from '@muljin/material-components/src/lib/internal-utils/table-filter';
 import {
   ComponentsIntl,
-  MULJIN_COMPONENT_INTL_PROVIDER,
+  MULJIN_COMPONENT_INTL_PROVIDER
 } from '@muljin/material-components/src/lib/services';
 import {
   TableAction,
-  TableColumn,
+  TableColumn
 } from '@muljin/material-components/src/lib/types';
 import { Subscription } from 'rxjs';
 
@@ -67,11 +67,11 @@ import { Subscription } from 'rxjs';
     TableFilterComponent,
     TableCellComponent,
     MatSortModule,
-    CardComponent,
     BlurSpinnerComponent,
     MatButtonModule,
     MatDialogModule,
     DragDropModule,
+    MatCardModule,
   ],
   providers: [MULJIN_COMPONENT_INTL_PROVIDER],
   templateUrl: './data-table.component.html',
