@@ -1,4 +1,10 @@
-import { NgClass, NgForOf, NgIf, NgStyle } from '@angular/common';
+import {
+  NgClass,
+  NgForOf,
+  NgIf,
+  NgStyle,
+  NgTemplateOutlet,
+} from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,6 +24,7 @@ import { TableColumn } from '@muljin/material-components/src/lib/types';
     MatIconModule,
     MatTooltipModule,
     MatButtonModule,
+    NgTemplateOutlet,
   ],
   templateUrl: './table-cell.component.html',
   styleUrls: ['./table-cell.component.scss'],

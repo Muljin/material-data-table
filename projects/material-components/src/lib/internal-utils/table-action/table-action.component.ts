@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,7 +8,13 @@ import { TableAction } from '@muljin/material-components/src/lib/types';
 @Component({
   selector: 'muljin-table-action',
   standalone: true,
-  imports: [NgIf, MatIconModule, MatTooltipModule, MatButtonModule],
+  imports: [
+    NgIf,
+    MatIconModule,
+    MatTooltipModule,
+    MatButtonModule,
+    NgTemplateOutlet,
+  ],
   templateUrl: './table-action.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
