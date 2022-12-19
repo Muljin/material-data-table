@@ -1,7 +1,14 @@
+.cell-icon-btn {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+
 .cell-icon {
-  vertical-align: middle;
-  margin-left: 5px;
-  transform: scale(0.8);
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  font-size: 18px;
 }
 
 .link {
