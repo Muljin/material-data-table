@@ -87,15 +87,15 @@ export class DataTableComponent
   @Input() columns: TableColumn[] = [];
   @Input() actions: TableAction[] = [];
   @Input() data: Array<any> | null = null;
-  @Input() loading: boolean | undefined | null = false;
-  @Input() title: string | null = null;
+  @Input() loading?: boolean | null = false;
+  @Input() title?: string | null = null;
   @Input() pagination = true;
   @Input() pageSizes = [5, 10, 20, 50, 100];
-  @Input() pageSize: number | null = null;
-  @Input() totalRecords: number | null = null;
-  @Input() pageIndex: number | null = null;
+  @Input() pageSize?: number | null = null;
+  @Input() totalRecords?: number | null = null;
+  @Input() pageIndex?: number | null = null;
   @Input() isClientSide = false;
-  @Input() initialFilterValues: any = null;
+  @Input() initialFilterValues?: any = null;
   @Input() dragAndDrop = false;
 
   @Output() rowSelect = new EventEmitter<any>();

@@ -22,7 +22,7 @@ export type TableColumn = {
   };
 
   filter?: {
-    type: 'text' | 'select' | 'date' | 'date-range';
+    type: 'text' | 'select';
 
     // The name of the filter control to use in the filter form.
     controlName?: string;
